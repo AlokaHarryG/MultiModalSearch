@@ -3,11 +3,14 @@ load datasets\WIKI.mat
 itr = I_tr;
 ttr = T_tr;
 ltr = L_tr;
-[n,c] = size(ltr);
+L = full(ind2vec(ltr'));%Label转成独热矩阵
+[c,n] = size(L);
 tldl = zeros(c,n);
+[~,di] = size(I_tr);
+[~,dt] = size(T_tr);
 for k = 1:c
     for i = 1:n
-        tldl(k,i)=ltr(i,k)/norm(ltr(i,:),2);
+        tldl(k,i)=L(k,i)/norm(L(:,i),2);
     end
 end
 % 我比较弱，本代码中的所有矩阵均为转置TT
